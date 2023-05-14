@@ -116,12 +116,7 @@ class IssuedBook(models.Model):
 
 
 
-class Staff(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=True, blank=False)
-    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.admin.first_name + " " +  self.admin.last_name
 
 #Newly added models are here=================
 class Exam(models.Model):
@@ -144,6 +139,14 @@ class Classes(models.Model):
     def __str__(self):
         return f'{self.name} {self.branch}'
 
+
+class Staff(models.Model):
+    class_name = models.ForeignKey(Classes, on_delete=models.DO_NOTHING, null=True, blank=False)
+    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.admin.first_name + " " +  self.admin.last_name
+
 class Stream(models.Model):
     stream_id = models.AutoField(primary_key=True)
     class_id = models.ForeignKey(Classes, on_delete=models.CASCADE)
@@ -157,12 +160,12 @@ class Stream(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=120)
     staff = models.ForeignKey(Staff,on_delete=models.CASCADE,)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    class_name = models.ForeignKey(Stream, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.name} - {self.course}'
+        return f'{self.name} - {self.class_name}'
 
 class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
