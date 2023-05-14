@@ -17,3 +17,6 @@ admin.site.register(IssuedBook)
 admin.site.register(Library)
 admin.site.register(Subject)
 admin.site.register(Session)
+
+#change admin site title
+admin.site.site_header = "Alameen Plus"
