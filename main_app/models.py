@@ -65,7 +65,14 @@ class Admin(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
 
+#Create a class for the branches (school)
+class Branch(models.Model):
+    name = models.CharField(max_length=20, unique=True)
+    address= models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+    
 class Course(models.Model):
     name = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -115,18 +122,56 @@ class Staff(models.Model):
     def __str__(self):
         return self.admin.first_name + " " +  self.admin.last_name
 
+#Newly added models are here=================
+class Exam(models.Model):
+    exam_id = models.AutoField(primary_key=True)
+    created_at = models.DateField(auto_now=True)
+    exam_date = models.DateField()
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name    
+
+class Classes(models.Model):
+    class_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=120, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+class Stream(models.Model):
+    stream_id = models.AutoField(primary_key=True)
+    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    name = models.CharField(max_length=120)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.class_id, self.name
 
 class Subject(models.Model):
     name = models.CharField(max_length=120)
     staff = models.ForeignKey(Staff,on_delete=models.CASCADE,)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course= models.ForeignKey(Course, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
+class ExamMeanResult(models.Model):
+    result_id = models.AutoField(primary_key=True)
+    exam_id =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True)
+    teacher =models.ForeignKey(Staff, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject,on_delete=models.DO_NOTHING)
+    score = models.IntegerField()
 
+    def __str__(self):
+        return self.exam_id, self.teacher, self.subject, self.score
+
+#End of newly added models=============/////==========
 class Attendance(models.Model):
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)

@@ -7,19 +7,22 @@ from .models import *
 class UserModel(UserAdmin):
     ordering = ('email',)
 
-   
-
-
+admin.site.register(Branch)
 admin.site.register(CustomUser, UserModel)
 admin.site.register(Staff)
 admin.site.register(Student)
 admin.site.register(Course)
-admin.site.register(Book)
-admin.site.register(IssuedBook)
-admin.site.register(Library)
+#admin.site.register(Book)
+#admin.site.register(IssuedBook)
+#admin.site.register(Library)
 admin.site.register(Subject)
 admin.site.register(Session)
 admin.site.register(StudentResult)
+admin.site.register(Exam)
+admin.site.register(ExamMeanResult)
+admin.site.register(Classes)
+admin.site.register(Stream)
+
 
 #change admin site title
 admin.site.site_header = "Alameen Plus"
