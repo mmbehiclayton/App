@@ -124,10 +124,11 @@ class Exam(models.Model):
     created_at = models.DateField(auto_now=True)
     exam_date = models.DateField()
     name = models.CharField(max_length=50)
+    target_marks = models.IntegerField()
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return f'{self.name} | {self.session}'    
+        return f'{self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
 
 class Classes(models.Model):
     class_id = models.AutoField(primary_key=True)
