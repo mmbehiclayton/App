@@ -132,7 +132,7 @@ class Exam(models.Model):
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return self.name    
+        return f'{self.name} | {self.session}'    
 
 class Classes(models.Model):
     class_id = models.AutoField(primary_key=True)
@@ -157,12 +157,12 @@ class Stream(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=120)
     staff = models.ForeignKey(Staff,on_delete=models.CASCADE,)
-    course= models.ForeignKey(Course, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.course}'
 
 class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
@@ -172,7 +172,7 @@ class ExamMeanResult(models.Model):
     score = models.IntegerField()
 
     def __str__(self):
-        return self.exam_id, self.teacher, self.subject, self.score
+        return f'{self.exam_id} - {self.teacher} - {self.subject} - {self.score}'
 
 #End of newly added models=============/////==========
 class Attendance(models.Model):
