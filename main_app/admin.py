@@ -7,6 +7,8 @@ from .models import *
 class UserModel(UserAdmin):
     ordering = ('email',)
 
+   
+
 
 admin.site.register(CustomUser, UserModel)
 admin.site.register(Staff)
@@ -17,6 +19,7 @@ admin.site.register(IssuedBook)
 admin.site.register(Library)
 admin.site.register(Subject)
 admin.site.register(Session)
+admin.site.register(StudentResult)
 
 #change admin site title
 admin.site.site_header = "Alameen Plus"
