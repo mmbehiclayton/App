@@ -8,6 +8,8 @@ class UserModel(UserAdmin):
     ordering = ('email',)
 
 admin.site.register(Branch)
+admin.site.register(Classes)
+admin.site.register(Stream)
 admin.site.register(CustomUser, UserModel)
 admin.site.register(Staff)
 admin.site.register(Student)
@@ -20,8 +22,8 @@ admin.site.register(Session)
 admin.site.register(StudentResult)
 admin.site.register(Exam)
 admin.site.register(ExamMeanResult)
-admin.site.register(Classes)
-admin.site.register(Stream)
+
+
 
 
 #change admin site title

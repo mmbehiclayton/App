@@ -67,6 +67,7 @@ class Admin(models.Model):
 
 #Create a class for the branches (school)
 class Branch(models.Model):
+    branch_id=models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, unique=True)
     address= models.CharField(max_length=100)
 
@@ -128,18 +129,20 @@ class Exam(models.Model):
     created_at = models.DateField(auto_now=True)
     exam_date = models.DateField()
     name = models.CharField(max_length=50)
+    session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name    
 
 class Classes(models.Model):
     class_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=120, unique=True)
+    name = models.CharField(max_length=120)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} {self.branch}'
 
 class Stream(models.Model):
     stream_id = models.AutoField(primary_key=True)
@@ -149,7 +152,7 @@ class Stream(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.class_id, self.name
+        return f'{self.class_id} {self.name}'
 
 class Subject(models.Model):
     name = models.CharField(max_length=120)
