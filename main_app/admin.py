@@ -23,8 +23,5 @@ admin.site.register(StudentResult)
 admin.site.register(Exam)
 admin.site.register(ExamMeanResult)
 
-
-
-
 #change admin site title
 admin.site.site_header = "Alameen Plus"
