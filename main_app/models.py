@@ -85,21 +85,6 @@ class Exam(models.Model):
     def __str__(self):
         return f'{self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
 
-class ExamResults(models.Model):
-    STATUS = [
-        ('Passed', 'Passed')
-        ('Average', 'Average')
-        ('Below Average', 'Below Average')
-        ('Failed', 'Failed')
-    ]
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE,null=True)
-    result = models.PositiveIntegerField(null=True)
-    status = models.CharField(max_length=15, choices=STATUS, null=True)
-    created = models.DateField(auto_now_add=True)
-    
-    def __str__(self):
-        return f'{self.exam} result is: {self.result}, Status is {self.status} '
-
 
 class Classes(models.Model):
     class_id = models.AutoField(primary_key=True)
@@ -144,8 +129,10 @@ class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
     exam_id =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True)
     teacher =models.ForeignKey(Staff, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject,on_delete=models.DO_NOTHING)
+    subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
     score = models.IntegerField()
+    created = models.DateField(auto_now_add=True)
+
 
     def __str__(self):
         return f'{self.exam_id} - {self.teacher} - {self.subject} - {self.score}'
