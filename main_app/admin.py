@@ -12,14 +12,10 @@ admin.site.register(Classes)
 admin.site.register(Stream)
 admin.site.register(CustomUser, UserModel)
 admin.site.register(Staff)
-#admin.site.register(Student)
-admin.site.register(Course)
-#admin.site.register(Book)
-#admin.site.register(IssuedBook)
-#admin.site.register(Library)
+
 admin.site.register(Subject)
 admin.site.register(Session)
-admin.site.register(StudentResult)
+
 admin.site.register(Exam)
 admin.site.register(ExamMeanResult)
 
