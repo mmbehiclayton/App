@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import *
 from .models import *
+import sweetify
 
 
 @login_required(redirect_field_name="user_login")
@@ -59,7 +60,8 @@ def add_staff(request):
                 user.address = address
                 user.staff.course = course
                 user.save()
-                messages.success(request, "Successfully Added")
+                #messages.success(request, "Successfully Added")
+                sweetify.success(request, "Successfully Added")
                 return redirect(reverse('add_staff'))
 
             except Exception as e:
@@ -87,7 +89,7 @@ def add_subject(request):
                 subject.staff = staff
                 subject.course = course
                 subject.save()
-                messages.success(request, "Successfully Added")
+                sweetify.success(request, "Successfully Added")
                 return redirect(reverse('add_subject'))
 
             except Exception as e:
@@ -153,12 +155,12 @@ def edit_staff(request, staff_id):
                 staff.course = course
                 user.save()
                 staff.save()
-                messages.success(request, "Successfully Updated")
+                sweetify.success(request, "Successfully Updated")
                 return redirect(reverse('edit_staff', args=[staff_id]))
             except Exception as e:
-                messages.error(request, "Could Not Update " + str(e))
+                sweetify.error(request, "Could Not Update " + str(e))
         else:
-            messages.error(request, "Please fil form properly")
+            sweetify.error(request, "Please fil form properly")
     else:
         user = CustomUser.objects.get(id=staff_id)
         staff = Staff.objects.get(id=user.id)
@@ -184,12 +186,12 @@ def edit_subject(request, subject_id):
                 subject.staff = staff
                 subject.course = course
                 subject.save()
-                messages.success(request, "Successfully Updated")
+                sweetify.success(request, "Successfully Updated")
                 return redirect(reverse('edit_subject', args=[subject_id]))
             except Exception as e:
-                messages.error(request, "Could Not Add " + str(e))
+                sweetify.error(request, "Could Not Add " + str(e))
         else:
-            messages.error(request, "Fill Form Properly")
+            sweetify.error(request, "Fill Form Properly")
     return render(request, 'hod_template/edit_subject_template.html', context)
 
 @login_required(redirect_field_name="user_login")
@@ -200,12 +202,12 @@ def add_session(request):
         if form.is_valid():
             try:
                 form.save()
-                messages.success(request, "Session Created")
+                sweetify.success(request, "Session Created")
                 return redirect(reverse('add_session'))
             except Exception as e:
-                messages.error(request, 'Could Not Add ' + str(e))
+                sweetify.error(request, 'Could Not Add ' + str(e))
         else:
-            messages.error(request, 'Fill Form Properly ')
+            sweetify.error(request, 'Fill Form Properly ')
     return render(request, "hod_template/add_session_template.html", context)
 
 @login_required(redirect_field_name="user_login")
@@ -225,14 +227,14 @@ def edit_session(request, session_id):
         if form.is_valid():
             try:
                 form.save()
-                messages.success(request, "Session Updated")
+                sweetify.success(request, "Session Updated")
                 return redirect(reverse('edit_session', args=[session_id]))
             except Exception as e:
                 messages.error(
                     request, "Session Could Not Be Updated " + str(e))
                 return render(request, "hod_template/edit_session_template.html", context)
         else:
-            messages.error(request, "Invalid Form Submitted ")
+            sweetify.error(request, "Invalid Form Submitted ")
             return render(request, "hod_template/edit_session_template.html", context)
 
     else:
@@ -299,10 +301,10 @@ def admin_view_profile(request):
                 custom_user.first_name = first_name
                 custom_user.last_name = last_name
                 custom_user.save()
-                messages.success(request, "Profile Updated!")
+                sweetify.success(request, "Profile Updated!")
                 return redirect(reverse('admin_view_profile'))
             else:
-                messages.error(request, "Invalid Data Provided")
+                sweetify.error(request, "Invalid Data Provided")
         except Exception as e:
             messages.error(
                 request, "Error Occured While Updating Profile " + str(e))
@@ -349,21 +351,21 @@ def send_staff_notification(request):
 def delete_staff(request, staff_id):
     staff = get_object_or_404(CustomUser, staff__id=staff_id)
     staff.delete()
-    messages.success(request, "Staff deleted successfully!")
+    sweetify.success(request, "Staff deleted successfully!")
     return redirect(reverse('manage_staff'))
 
 @login_required(redirect_field_name="user_login")
 def delete_student(request, student_id):
     student = get_object_or_404(CustomUser, student__id=student_id)
     student.delete()
-    messages.success(request, "Student deleted successfully!")
+    sweetify.success(request, "Student deleted successfully!")
     return redirect(reverse('manage_student'))
 
 @login_required(redirect_field_name="user_login")
 def delete_subject(request, subject_id):
     subject = get_object_or_404(Subject, id=subject_id)
     subject.delete()
-    messages.success(request, "Subject deleted successfully!")
+    sweetify.success(request, "Subject deleted successfully!")
     return redirect(reverse('manage_subject'))
 
 @login_required(redirect_field_name="user_login")
@@ -371,7 +373,7 @@ def delete_session(request, session_id):
     session = get_object_or_404(Session, id=session_id)
     try:
         session.delete()
-        messages.success(request, "Session deleted successfully!")
+        sweetify.success(request, "Session deleted successfully!")
     except Exception:
         messages.error(
             request, "There are students assigned to this session. Please move them to another session.")
