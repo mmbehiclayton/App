@@ -38,6 +38,12 @@ class Session(models.Model):
     def __str__(self):
         return "From " + str(self.start_year) + " to " + str(self.end_year)
 
+class SessionTerm(models.Model):
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    name = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class CustomUser(AbstractUser):
     USER_TYPE = ((1, "HOD"), (2, "Staff"), (3, "Student"))
@@ -81,9 +87,10 @@ class Exam(models.Model):
     name = models.CharField(max_length=50)
     target_marks = models.IntegerField()
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
+    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
+        return f'{self.term} {self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
 
 
 class Classes(models.Model):

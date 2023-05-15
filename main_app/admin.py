@@ -18,6 +18,7 @@ admin.site.register(Session)
 
 admin.site.register(Exam)
 admin.site.register(ExamMeanResult)
+admin.site.register(SessionTerm)
 
 #change admin site title
 admin.site.site_header = "Alameen Plus"
