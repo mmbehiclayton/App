@@ -39,17 +39,20 @@ class Session(models.Model):
         return "From " + str(self.start_year) + " to " + str(self.end_year)
 
 class SessionTerm(models.Model):
+    CHOICE = [
+        ('First Term', 'First Term'),
+        ('Second Term', 'Second Term'),
+        ('Third Term', 'Third Term')
+    ]
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
-    name = models.CharField(max_length=10, unique=True)
+    term = models.CharField(max_length=15, unique=True, choices=CHOICE)
 
     def __str__(self):
-        return self.name
+        return self.term
 
 class CustomUser(AbstractUser):
     USER_TYPE = ((1, "HOD"), (2, "Staff"), (3, "Student"))
     GENDER = [("M", "Male"), ("F", "Female")]
-    
-    
     username = None  # Removed username, using email instead
     email = models.EmailField(unique=True)
     user_type = models.CharField(default=1, choices=USER_TYPE, max_length=1)
@@ -61,6 +64,7 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
+
     def __str__(self):
         return  self.first_name + " " + self.last_name
 
@@ -114,7 +118,7 @@ class Staff(models.Model):
 
 class Stream(models.Model):
     stream_id = models.AutoField(primary_key=True)
-    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    class_id = models.ForeignKey(Classes, on_delete=models.CASCADE, verbose_name='class')
     name = models.CharField(max_length=120)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -134,7 +138,7 @@ class Subject(models.Model):
 
 class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
-    exam_id =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True)
+    exam =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True, verbose_name='Exam Name')
     teacher =models.ForeignKey(Staff, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
     score = models.IntegerField()
@@ -142,7 +146,7 @@ class ExamMeanResult(models.Model):
 
 
     def __str__(self):
-        return f'{self.exam_id} - {self.teacher} - {self.subject} - {self.score}'
+        return f'{self.exam} - {self.teacher} - {self.subject} - {self.score}'
 
 #End of newly added models=============/////==========
 

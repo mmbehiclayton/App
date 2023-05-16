@@ -101,26 +101,33 @@ urlpatterns = [
 
 
 
-    # Student
-    path("student/home/", student_views.student_home, name='student_home'),
-    path("student/view/attendance/", student_views.student_view_attendance,
-         name='student_view_attendance'),
-    path("student/apply/leave/", student_views.student_apply_leave,
-         name='student_apply_leave'),
-    path("student/feedback/", student_views.student_feedback,
-         name='student_feedback'),
-    path("student/view/profile/", student_views.student_view_profile,
-         name='student_view_profile'),
-    path("student/fcmtoken/", student_views.student_fcmtoken,
-         name='student_fcmtoken'),
-     # path('student/todo',student_views.todo,name='todo'),
+     #  TERMS 
+     path('manage/terms/', hod_views.manage_term, name='manage_term'),
+     path('add/term/', hod_views.add_term, name='add_term'),
+     path('update/term/<int:id>/', hod_views.update_term, name='update_term'),
+     path('delete/term/<int:id>/', hod_views.delete_term, name='delete_term'),
+     
+     # BRANCH 
+     path('manage/branch/', hod_views.manage_branch, name='manage_branch'),
+     path('add/branch/', hod_views.add_branch, name='add_branch'),
+     path('update/branch/<int:id>/', hod_views.update_branch, name='update_branch'),
+     path('delete/term/<int:id>/', hod_views.delete_branch, name='delete_branch'),
+
+     # CLASSES
+     path('manage/class/', hod_views.manage_classes, name='manage_classes'),
+     path('add/class/', hod_views.add_classes, name='add_classes'),
+     path('update/class/<int:id>/', hod_views.update_classes, name='update_classes'),
+     path('delete/class/<int:id>/', hod_views.delete_class, name='delete_class'),
+
+
+     # STREAM 
+     path('manage/stream/', hod_views.manage_stream, name='manage_stream'),
+     path('add/stream/', hod_views.add_stream, name='add_stream'),
+     path('update/stream/<int:id>/', hod_views.update_stream, name='update_stream'),
+     path('delete/stream/<int:id>/', hod_views.delete_stream, name='delete_stream'),
+
 
      
-     path("student/viewbooks/", student_views.view_books, name="view_books"),
-
-    path("student/view/notification/", student_views.student_view_notification,
-         name="student_view_notification"),
-    path('student/view/result/', student_views.student_view_result,
-         name='student_view_result'),
+     
 
 ]

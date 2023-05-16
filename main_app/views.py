@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
-
 from .EmailBackend import EmailBackend
 from .models import Session, Subject 
 
@@ -18,8 +17,7 @@ def login_page(request):
             return redirect("admin_home")
         elif request.user.user_type == '2':
             return redirect("staff_home")
-        else:
-            return redirect("student_home")
+        
     return render(request, 'main_app/login.html')
 
 

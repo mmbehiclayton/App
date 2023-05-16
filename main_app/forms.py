@@ -118,3 +118,44 @@ class StaffEditForm(CustomUserForm):
     class Meta(CustomUserForm.Meta):
         model = Staff
         fields = CustomUserForm.Meta.fields
+
+
+# Exam forms 
+"""
+ExamMeanResult, Exam
+"""
+class ExamResultForm(forms.ModelForm):
+
+    class Meta:
+        model = ExamMeanResult
+        fields = ['exam', 'subject', 'teacher', 'score']
+
+class ExamForm(forms.ModelForm):
+    class Meta:
+        model = Exam
+        fields = ['name', 'exam_date', 'target_marks', 'session', 'term']
+
+
+class SessionTermForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SessionTermForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = SessionTerm
+        fields = ['session', 'term']
+        
+
+class BranchesForm(forms.ModelForm):
+    class Meta:
+        model = Branch
+        fields = '__all__'
+
+
+class ClassesForm(forms.ModelForm):
+    class Meta:
+        model = Classes
+        fields = ['name', 'branch']
+
+class StreamForm(forms.ModelForm):
+    class Meta:
+        model = Stream
+        fields = ['class_id', 'name']

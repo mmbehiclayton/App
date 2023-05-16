@@ -217,6 +217,212 @@ def manage_session(request):
     return render(request, "hod_template/manage_session.html", context)
 @login_required(redirect_field_name="user_login")
 
+
+# Terms functionality 
+
+@login_required(redirect_field_name="user_login")
+def manage_term(request):
+    terms = SessionTerm.objects.all()
+    context = {
+        'terms': terms
+    }
+    return render(request, "hod_template/manage_term.html", context)
+
+@login_required(redirect_field_name="user_login")
+def add_term(request):
+    if request.method == 'POST':
+        form = SessionTermForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, "Term Created")
+            return redirect(reverse('manage_term'))
+    else:
+        form = SessionTermForm()
+    context = {
+        'form': form
+    }
+
+    return render(request, "hod_template/add_term.html", context)
+    
+@login_required(redirect_field_name="user_login")
+def update_term(request, id):
+
+    term_obj = SessionTerm.objects.get(id=id)
+    if request.method == 'POST':
+        form = SessionTermForm(request.POST, instance=term_obj)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Term updated !')
+            return redirect('manage_term')
+    else:
+        form = SessionTermForm(instance=term_obj)
+
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_term.html", context)
+
+@login_required(redirect_field_name="user_login")
+def delete_term(request, id):
+    term_obj = SessionTerm.objects.get(id=id)
+    try:
+        term_obj.delete()
+        sweetify.success(request, "Term deleted successfully!")
+    except Exception:
+        messages.error(
+            request, "There are students assigned to this term.")
+    return redirect(reverse('manage_term'))
+
+#  Branches functionalities
+
+@login_required(redirect_field_name="user_login")
+def manage_branch(request):
+    branch = Branch.objects.all()
+    context = {
+        'branch': branch
+    }
+    return render(request, "hod_template/manage_branch.html", context)
+
+@login_required(redirect_field_name="user_login")
+def add_branch(request):
+    if request.method == 'POST':
+        form = BranchesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Branch Added !')
+            return redirect('manage_branch')
+    else:
+        form = BranchesForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_branch.html", context)
+
+@login_required(redirect_field_name="user_login")
+def update_branch(request,id):
+    branch_obj = Branch.objects.get(branch_id=id)
+    if request.method == 'POST':
+        form = BranchesForm(request.POST, instance=branch_obj)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Branch updated !')
+            return redirect('manage_branch')
+    else:
+        form = BranchesForm(instance=branch_obj)
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_branch.html", context)
+
+@login_required(redirect_field_name="user_login")
+def delete_branch(request, id):
+    branch_obj = Branch.objects.get(branch_id=id)
+    branch_obj.delete()
+    sweetify.success(request, "Branch deleted successfully!")            
+    return redirect(reverse('manage_branch'))
+
+# classes Functionalities
+@login_required(redirect_field_name="user_login")
+def manage_classes(request):
+    classes = Classes.objects.all()
+    context = {
+        'classes': classes
+    }
+    return render(request, "hod_template/manage_classes.html", context)
+
+@login_required(redirect_field_name="user_login")
+def add_classes(request):
+    if request.method == 'POST':
+        form = ClassesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Class Added !')
+            return redirect('manage_classes')
+    else:
+        form = ClassesForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_class.html", context)
+
+@login_required(redirect_field_name="user_login")
+def update_classes(request,id):
+    class_obj = Classes.objects.get(class_id=id)
+    if request.method == 'POST':
+        form = ClassesForm(request.POST, instance=class_obj)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Class updated !')
+            return redirect('manage_classes')
+    else:
+        form = ClassesForm(instance=class_obj)
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_branch.html", context)
+
+@login_required(redirect_field_name="user_login")
+def delete_class(request, id):
+    class_obj =Classes.objects.get(class_id=id)
+    class_obj.delete()
+    sweetify.success(request, "Class deleted successfully!")            
+    return redirect(reverse('manage_classes'))
+
+
+#  stream Functionalities
+
+@login_required(redirect_field_name="user_login")
+def manage_stream(request):
+    stream = Stream.objects.all()
+    context = {
+        'stream': stream
+    }
+    return render(request, "hod_template/manage_stream.html", context)
+
+@login_required(redirect_field_name="user_login")
+def add_stream(request):
+    if request.method == 'POST':
+        form = StreamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Class Added !')
+            return redirect('manage_stream')
+    else:
+        form = StreamForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_stream.html", context)
+
+@login_required(redirect_field_name="user_login")
+def update_stream(request,id):
+    stream = StreamForm.objects.get(class_id=id)
+    if request.method == 'POST':
+        form = ClassesForm(request.POST, instance=stream)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Stream updated !')
+            return redirect('manage_classes')
+    else:
+        form = ClassesForm(instance=stream)
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_stream.html", context)
+
+@login_required(redirect_field_name="user_login")
+def delete_stream(request, id):
+    stream_obj =Stream.objects.get(class_id=id)
+    stream_obj.delete()
+    sweetify.success(request, "Class deleted successfully!")            
+    return redirect(reverse('manage_classes'))
+
+
+
+
 @login_required(redirect_field_name="user_login")
 def edit_session(request, session_id):
     instance = get_object_or_404(Session, id=session_id)

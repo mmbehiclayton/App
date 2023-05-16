@@ -1,0 +1,58 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}MANAGE BRANCH{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h3 class="card-title">MANAGE Branch</h3>
+                            </div>
+                            <div class="col-md-1 p-1">
+                                <a class="btn btn-info" href="{% url 'add_branch' %}"> + Branch</a>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Branch</th>
+                                    <th>Address</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for branch in branch %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{branch.name}}</td>
+                                    <td>{{branch.address}}</td>
+                                    <td>
+                                        <a href="{% url 'update_branch' branch.branch_id %}" class="btn btn-info">Edit</a> -
+                                        <a href="{% url 'delete_term' branch.branch_id %}" onclick="return confirm('Are you sure you want to delete this Branch ?')" class="btn btn-danger">Delete</a> 
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+<a href="{% url 'update_branch' term.id %}" class="btn btn-info">Edit</a> -
+<a href="{% url 'delete_term' term.id %}" onclick="return confirm('Are you sure you want to delete this course ?')" class="btn btn-danger">Delete</a> 
