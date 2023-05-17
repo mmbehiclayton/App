@@ -69,35 +69,16 @@ urlpatterns = [
 
     # Staff
     path("staff/home/", staff_views.staff_home, name='staff_home'),
-    path("staff/apply/leave/", staff_views.staff_apply_leave,
-         name='staff_apply_leave'),
+  
     path("staff/feedback/", staff_views.staff_feedback, name='staff_feedback'),
     path("staff/view/profile/", staff_views.staff_view_profile,
          name='staff_view_profile'),
-    path("staff/attendance/take/", staff_views.staff_take_attendance,
-         name='staff_take_attendance'),
-    path("staff/attendance/update/", staff_views.staff_update_attendance,
-         name='staff_update_attendance'),
-    path("staff/get_students/", staff_views.get_students, name='get_students'),
-     path("staff/addbook/", staff_views.add_book, name="add_book"),
-    path("staff/issue_book/", staff_views.issue_book, name="issue_book"),
-    path("staff/view_issued_book/", staff_views.view_issued_book, name="view_issued_book"),
-
-
-
-    path("staff/attendance/fetch/", staff_views.get_student_attendance,
-         name='get_student_attendance'),
-    path("staff/attendance/save/",
-         staff_views.save_attendance, name='save_attendance'),
-    path("staff/attendance/update/",
-         staff_views.update_attendance, name='update_attendance'),
-    path("staff/fcmtoken/", staff_views.staff_fcmtoken, name='staff_fcmtoken'),
-    path("staff/view/notification/", staff_views.staff_view_notification,
-         name="staff_view_notification"),
-    path("staff/result/add/", staff_views.staff_add_result, name='staff_add_result'),
+  
     
-    path('staff/result/fetch/', staff_views.fetch_student_result,
-         name='fetch_student_result'),
+    
+  
+
+   
 
 
 
@@ -119,12 +100,23 @@ urlpatterns = [
      path('update/class/<int:id>/', hod_views.update_classes, name='update_classes'),
      path('delete/class/<int:id>/', hod_views.delete_class, name='delete_class'),
 
-
      # STREAM 
      path('manage/stream/', hod_views.manage_stream, name='manage_stream'),
      path('add/stream/', hod_views.add_stream, name='add_stream'),
      path('update/stream/<int:id>/', hod_views.update_stream, name='update_stream'),
      path('delete/stream/<int:id>/', hod_views.delete_stream, name='delete_stream'),
+
+     # EXAMS
+     path('manage/exam/', hod_views.manage_exam, name='manage_exam'),
+     path('add/exam/', hod_views.add_exam, name='add_exam'),
+     path('update/exam/<int:id>/', hod_views.update_exam, name='update_exam'),
+     path('delete/exam/<int:id>/', hod_views.delete_exam, name='delete_exam'),
+
+     # EXAMS RESULTS
+     path('manage/exam_result/', hod_views.manage_exam_result, name='manage_exam_result'),
+     path('add/exam_result/', hod_views.add_exam_result, name='add_exam_result'),
+     path('update/exam_result/<int:id>/', hod_views.update_exam_result, name='update_exam_result'),
+     path('delete/exam_result/<int:id>/', hod_views.delete_exam_result, name='delete_exam_result'),
 
 
      

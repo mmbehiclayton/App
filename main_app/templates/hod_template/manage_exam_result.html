@@ -1,0 +1,67 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}MANAGE EXAMS RESULTS{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h3 class="card-title">MANAGE EXAMS RESULTS</h3>
+                            </div>
+                            <div class="col-md-1 p-1">
+                                <a class="btn btn-info" href="{% url 'add_exam_result' %}">Add result</a>
+                            </div>
+                        </div>
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Exam</th>
+                                    <th>Subject</th>
+                                    <th>Score</th>
+                                    <!-- <th>Term</th>
+                                    <th>Exam Date</th>
+                                    <th>Term</th>
+                                    <th>Target Marks</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for exam in exam %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td> 
+                                    <td>{{exam.exam}}</td>
+                                    <td>{{exam.subject}}</td>
+                                    <td>{{exam.score}}</td>
+                                    <!-- <td>{{exam.term}}</td>
+                                    <td>{{exam.exam_date}}</td> -->
+                                    <!-- <td>{{exam.term}}</td>
+                                    <td>{{exam.target_marks}} %</td> -->
+                                    <td>
+                                        <a href="{% url 'update_exam_result' exam.result_id %}" class="btn btn-info">Edit</a> - 
+                                        <a href="{% url 'delete_exam_result' exam.result_id %}" onclick="return confirm('Are you sure you want to delete this Exam Result ?')" class="btn btn-danger">Delete</a>    
+
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+                            

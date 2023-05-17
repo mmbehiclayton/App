@@ -91,17 +91,6 @@ class Branch(models.Model):
   
 
 #Newly added models are here=================
-class Exam(models.Model):
-    exam_id = models.AutoField(primary_key=True)
-    created_at = models.DateField(auto_now=True)
-    exam_date = models.DateField()
-    name = models.CharField(max_length=50)
-    target_marks = models.IntegerField()
-    session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
-    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.term} {self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
 
 
 class Classes(models.Model):
@@ -122,6 +111,18 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.admin.first_name + " " +  self.admin.last_name
+class Exam(models.Model):
+    exam_id = models.AutoField(primary_key=True)
+    created_at = models.DateField(auto_now=True)
+    exam_date = models.DateField()
+    name = models.CharField(max_length=50, unique=True)
+    target_marks = models.IntegerField()
+    teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True)
+    session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
+    term = models.ForeignKey(SessionTerm, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return f'{self.term} {self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
 
 class Stream(models.Model):
     stream_id = models.AutoField(primary_key=True)
@@ -146,16 +147,14 @@ class Subject(models.Model):
 class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
     exam =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True, verbose_name='Exam Name')
-    teacher =models.ForeignKey(Staff, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
     score = models.IntegerField()
     created = models.DateField(auto_now_add=True)
 
-
     def __str__(self):
         return f'{self.exam} - {self.teacher} - {self.subject} - {self.score}'
 
-#End of newly added models=============/////==========
+#End of newly added models =============/////==========
 
 class FeedbackStaff(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE)

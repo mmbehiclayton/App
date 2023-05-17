@@ -23,6 +23,8 @@ def admin_home(request):
     subjects = Subject.objects.all()
     total_subject = subjects.count()
     subject_all = Subject.objects.all()
+    total_exam = Exam.objects.all().count()
+    exam_results = ExamMeanResult.objects.all().count()
     subject_list = []
     for subject in subject_all:
         subject_list.append(subject.name)
@@ -33,6 +35,9 @@ def admin_home(request):
         'total_staff': total_staff,
         'total_subject': total_subject,
         'subject_list': subject_list,
+        'total_exam': total_exam,
+        'exam_results': exam_results,
+
     }
     return render(request, 'hod_template/home_content.html', context)
 
@@ -399,15 +404,15 @@ def add_stream(request):
 
 @login_required(redirect_field_name="user_login")
 def update_stream(request,id):
-    stream = StreamForm.objects.get(class_id=id)
+    stream = Stream.objects.get(class_id=id)
     if request.method == 'POST':
-        form = ClassesForm(request.POST, instance=stream)
+        form = StreamForm(request.POST, instance=stream)
         if form.is_valid():
             form.save()
             sweetify.success(request, 'Stream updated !')
             return redirect('manage_classes')
     else:
-        form = ClassesForm(instance=stream)
+        form = StreamForm(instance=stream)
     context = {
         'form': form
     }
@@ -419,6 +424,113 @@ def delete_stream(request, id):
     stream_obj.delete()
     sweetify.success(request, "Class deleted successfully!")            
     return redirect(reverse('manage_classes'))
+
+
+# Exams Functionalities
+
+@login_required(redirect_field_name="user_login")
+def manage_exam(request):
+    exam = Exam.objects.all()
+    context = {
+        'exam': exam
+    }
+    return render(request, "hod_template/manage_exam.html", context)
+
+@login_required(redirect_field_name="user_login")
+def add_exam(request):
+    if request.method == 'POST':
+        form = ExamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Exam added !')
+            return redirect('manage_exam')
+    else:
+        form = ExamForm()
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_exam.html", context)
+
+
+@login_required(redirect_field_name="user_login")
+def update_exam(request,id):
+    exam = Exam.objects.get(exam_id=id)
+    if request.method == 'POST':
+        form = ExamForm(request.POST, instance=exam)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Exam updated !')
+            return redirect('manage_exam')
+    else:
+        form = ExamForm(instance=exam)
+
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/update_exam.html", context)
+
+@login_required(redirect_field_name="user_login")
+def delete_exam(request, id):
+    stream_obj =Exam.objects.get(exam_id=id)
+    stream_obj.delete()
+    sweetify.success(request, "Exam deleted successfully!")            
+    return redirect(reverse('manage_exam'))
+
+
+# Exam results Functionalities
+
+@login_required(redirect_field_name="user_login")
+def manage_exam_result(request):
+    exam = ExamMeanResult.objects.all()
+    context = {
+        'exam': exam
+    }
+    return render(request, "hod_template/manage_exam_result.html", context)
+
+@login_required(redirect_field_name="user_login")
+def add_exam_result(request):
+    if request.method == 'POST':
+        form = ExamResultForm(request.POST)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Exam Mean added !')
+            return redirect('manage_exam_result')
+    else:
+        form = ExamResultForm()
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/add_exam_result.html", context)
+
+@login_required(redirect_field_name="user_login")
+def update_exam_result(request,id):
+    exam = ExamMeanResult.objects.get(result_id=id)
+    if request.method == 'POST':
+        form = ExamResultForm(request.POST, instance=exam)
+        if form.is_valid():
+            form.save()
+            sweetify.success(request, 'Exam Result updated !')
+            return redirect('manage_exam_result')
+    else:
+        form = ExamResultForm(instance=exam)
+
+    context = {
+        'form': form
+    }
+    return render(request, "hod_template/update_exam_result.html", context)
+
+
+@login_required(redirect_field_name="user_login")
+def delete_exam_result(request, id):
+    exam_obj =ExamMeanResult.objects.get(result_id=id)
+    exam_obj.delete()
+    sweetify.success(request, "Exam deleted successfully!")            
+    return redirect(reverse('manage_exam'))
+
+
+
+
+
 
 
 @login_required(redirect_field_name="user_login")
@@ -443,8 +555,6 @@ def edit_session(request, session_id):
 
     else:
         return render(request, "hod_template/edit_session_template.html", context)
-
-
 
 @login_required(redirect_field_name="user_login")
 @csrf_exempt

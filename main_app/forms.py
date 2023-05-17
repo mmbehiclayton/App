@@ -121,20 +121,15 @@ class StaffEditForm(CustomUserForm):
 
 
 # Exam forms 
-"""
-ExamMeanResult, Exam
-"""
-class ExamResultForm(forms.ModelForm):
-
-    class Meta:
-        model = ExamMeanResult
-        fields = ['exam', 'subject', 'teacher', 'score']
 
 class ExamForm(forms.ModelForm):
     class Meta:
         model = Exam
         fields = ['name', 'exam_date', 'target_marks', 'session', 'term']
-
+        widgets = {
+            'exam_date': DateInput(attrs={'type': 'date'}),
+            
+        }
 
 class SessionTermForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -159,3 +154,21 @@ class StreamForm(forms.ModelForm):
     class Meta:
         model = Stream
         fields = ['class_id', 'name']
+
+
+class ExamForm(forms.ModelForm):
+
+    class Meta:
+        model = Exam
+        fields = ['name', 'exam_date', 'session', 'term', 'teacher', 'target_marks']
+        widgets = {
+            'exam_date': DateInput(attrs={'type': 'date'}),
+            
+        }
+
+
+class ExamResultForm(forms.ModelForm):
+
+    class Meta:
+        model = ExamMeanResult
+        fields = ['exam', 'subject', 'score']        

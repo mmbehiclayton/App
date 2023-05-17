@@ -8,7 +8,7 @@
         <div class="row">
           
           <!-- ./col -->
-          <div class="col-lg-4 col-6">
+          <div class="col-lg-3 col-6">
               <!-- small box -->
               <div class="small-box bg-success">
                   <div class="inner">
@@ -23,7 +23,7 @@
               </div>
           </div>
          
-          <div class="col-lg-4 col-6">
+          <div class="col-lg-3 col-6">
               <!-- small box -->
               <div class="small-box bg-danger">
                   <div class="inner">
@@ -36,20 +36,34 @@
                   <a href="{% url 'manage_subject' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
           </div>
-          <div class="col-lg-4 col-6">
+          <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>4</h3>
+                    <h3>{{total_exam}}</h3>
 
-                    <p>Examinations Results</p>
+                    <p>Exams</p>
                 </div>
                 <div class="icon">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-pen"></i>
                 </div>
-                <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{% url 'manage_exam' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+        <div class="col-lg-3 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+              <div class="inner">
+                  <h3>{{exam_results}}</h3>
+
+                  <p>Exams Results</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-book"></i>
+              </div>
+              <a href="{% url 'manage_exam_result' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
           <!-- ./col -->
       </div>
         <!-- /.row -->
