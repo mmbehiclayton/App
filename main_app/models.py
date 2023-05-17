@@ -32,13 +32,15 @@ class CustomUserManager(UserManager):
 
 
 class Session(models.Model):
+    name = models.CharField(max_length=20)
     start_year = models.DateField()
     end_year = models.DateField()
 
     def __str__(self):
-        return "From " + str(self.start_year) + " to " + str(self.end_year)
+        return self.name + ": From " + str(self.start_year) + " to " + str(self.end_year)
 
 class SessionTerm(models.Model):
+
     CHOICE = [
         ('First Term', 'First Term'),
         ('Second Term', 'Second Term'),
@@ -46,6 +48,11 @@ class SessionTerm(models.Model):
     ]
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     term = models.CharField(max_length=15, unique=True, choices=CHOICE)
+
+    TERM_CHOICES = [("Term 1", "Term 1"), ("Term 2", "Term 2"), ("Term 3", "Term 3")]
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    name = models.CharField(max_length=10, choices=TERM_CHOICES)
+
 
     def __str__(self):
         return self.term
