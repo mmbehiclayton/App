@@ -371,7 +371,7 @@ def delete_class(request, id):
     return redirect(reverse('manage_classes'))
 
 
-#  stream Functionalities
+# stream Functionalities
 
 @login_required(redirect_field_name="user_login")
 def manage_stream(request):
@@ -387,7 +387,7 @@ def add_stream(request):
         form = StreamForm(request.POST)
         if form.is_valid():
             form.save()
-            sweetify.success(request, 'Class Added !')
+            sweetify.success(request, 'Stream Added !')
             return redirect('manage_stream')
     else:
         form = StreamForm()
@@ -415,12 +415,10 @@ def update_stream(request,id):
 
 @login_required(redirect_field_name="user_login")
 def delete_stream(request, id):
-    stream_obj =Stream.objects.get(class_id=id)
+    stream_obj =Stream.objects.get(stream_id=id)
     stream_obj.delete()
     sweetify.success(request, "Class deleted successfully!")            
     return redirect(reverse('manage_classes'))
-
-
 
 
 @login_required(redirect_field_name="user_login")
@@ -445,7 +443,7 @@ def edit_session(request, session_id):
 
     else:
         return render(request, "hod_template/edit_session_template.html", context)
-@login_required(redirect_field_name="user_login")
+
 
 
 @login_required(redirect_field_name="user_login")

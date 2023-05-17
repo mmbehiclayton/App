@@ -121,6 +121,42 @@
 
                     </ul>
                 </li> 
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link" >
+                        <i class="nav-icon fas fa-bookmark"></i>
+                        <p>
+                            Stream
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            {% url 'add_stream' as add_stream %}
+                            <a href="{{add_stream}}"
+                                class="nav-link  {% if add_stream == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Add Stream
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            {% url 'manage_stream' as manage_stream %}
+                            {% url 'edit_subject' subject_id as edit_subject %}
+                            <a href="{{manage_stream}}"
+                                class="nav-link  {% if edit_subject == request.path or manage_stream == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Manage Stream
+
+                                </p>
+                            </a>
+                        </li>
+                       
+
+                    </ul>
+                </li> 
 
 
                 <li class="nav-item has-treeview">

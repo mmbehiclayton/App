@@ -19,30 +19,31 @@
                                 <h3 class="card-title">MANAGE STREAM</h3>
                             </div>
                             <div class="col-md-1 p-1">
-                                <a class="btn btn-info" href="{% url 'add_classes' %}">Add Class</a>
+                                <a class="btn btn-info" href="{% url 'add_stream' %}"> + Stream</a>
                             </div>
                         </div>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
+                                    <th>Class</th>
                                     <th>Name</th>
-                                    <th>Branch</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for classes in classes %}
+                                {% for stream in stream %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td>{{classes.name}}</td>
-                                    <td>{{classes.branch}}</td>
-                                    <td>{{classes.created_at}}</td>
-                                    <td>{{classes.updated_at}}</td>
+                                    <td>{{stream.class_id}}</td>
+                                    <td>{{stream.name}}</td>
+                                    <td>{{stream.created_at}}</td>
+                                    <td>{{stream.updated_at}}</td>
+                                   
                                     <td>
-                                        <a href="{% url 'update_classes' classes.class_id %}" class="btn btn-info">Edit</a> -
-                                        <a href="{% url 'delete_class' classes.class_id %}" onclick="return confirm('Are you sure you want to delete this class ?')" class="btn btn-danger">Delete</a> 
+                                        <a href="{% url 'update_stream' stream.stream_id %}" class="btn btn-info">Edit</a> -
+                                        <a href="{% url 'delete_stream' stream.stream_id %}" onclick="return confirm('Are you sure you want to delete this Stream ?')" class="btn btn-danger">Delete</a> 
                                     </td>
                                 </tr>
                                 {% endfor %}
