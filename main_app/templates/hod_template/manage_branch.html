@@ -39,7 +39,7 @@
                                     <td>{{branch.address}}</td>
                                     <td>
                                         <a href="{% url 'update_branch' branch.branch_id %}" class="btn btn-info">Edit</a> -
-                                        <a href="{% url 'delete_term' branch.branch_id %}" onclick="return confirm('Are you sure you want to delete this Branch ?')" class="btn btn-danger">Delete</a> 
+                                        <a href="{% url 'delete_branch' branch.branch_id %}" onclick="return confirm('Are you sure you want to delete this Branch ?')" class="btn btn-danger">Delete</a> 
                                     </td>
                                 </tr>
                                 {% endfor %}

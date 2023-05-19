@@ -84,7 +84,7 @@ class SubjectForm(FormSettings):
 
     class Meta:
         model = Subject
-        fields = ['name', 'staff', 'class_name']
+        fields = ['name', 'staff']
 
 
 class SessionForm(FormSettings):
@@ -148,7 +148,7 @@ class BranchesForm(forms.ModelForm):
 class ClassesForm(forms.ModelForm):
     class Meta:
         model = Classes
-        fields = ['name', 'branch']
+        fields = ['name', 'category', 'branch']
 
 class StreamForm(forms.ModelForm):
     class Meta:
@@ -160,7 +160,7 @@ class ExamForm(forms.ModelForm):
 
     class Meta:
         model = Exam
-        fields = ['name', 'exam_date', 'session', 'term', 'teacher', 'target_marks']
+        fields = ['name', 'exam_date', 'session', 'term','target_marks']
         widgets = {
             'exam_date': DateInput(attrs={'type': 'date'}),
             
@@ -171,4 +171,4 @@ class ExamResultForm(forms.ModelForm):
 
     class Meta:
         model = ExamMeanResult
-        fields = ['exam', 'subject', 'score']        
+        fields = ['exam', 'subject', 'teacher' ,'score']             

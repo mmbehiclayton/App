@@ -94,11 +94,22 @@ class Branch(models.Model):
 
 
 class Classes(models.Model):
-    class_id = models.AutoField(primary_key=True)
+    # example
+    type_of_class = [
+        ('lower classes (1-3)', 'lower classes (1-3)'),
+        ('middle classes (4-6)', 'middle classes (4-6)'),
+        ('Junior Secondary', 'Junior Secondary'),
+    ]
+    # eexample
+    class_id = models.AutoField(primary_key=True )
+    category = models.CharField(max_length=20, choices=type_of_class, null=True)
     name = models.CharField(max_length=120)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('branch','name')
 
     def __str__(self):
         return f'{self.name} {self.branch}'
@@ -111,13 +122,14 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.admin.first_name + " " +  self.admin.last_name
+    
 class Exam(models.Model):
     exam_id = models.AutoField(primary_key=True)
     created_at = models.DateField(auto_now=True)
     exam_date = models.DateField()
     name = models.CharField(max_length=50, unique=True)
     target_marks = models.IntegerField()
-    teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True)
+    # teacher = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, null=True)
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
     term = models.ForeignKey(SessionTerm, on_delete=models.DO_NOTHING)
 
@@ -137,22 +149,25 @@ class Stream(models.Model):
 class Subject(models.Model):
     name = models.CharField(max_length=120)
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE,null=True)
-    class_name = models.ForeignKey(Stream, on_delete=models.CASCADE, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.name} - {self.class_name}'
+        return f'{self.name}'
 
 class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
     exam =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True, verbose_name='Exam Name')
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
+    teacher = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, null=True)
     score = models.IntegerField()
     created = models.DateField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('exam', 'subject')
+
     def __str__(self):
-        return f'{self.exam} - {self.teacher} - {self.subject} - {self.score}'
+        return f'{self.exam} - {self.subject} - {self.score}'
 
 #End of newly added models =============/////==========
 
