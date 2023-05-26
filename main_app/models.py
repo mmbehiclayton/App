@@ -174,7 +174,6 @@ class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
     exam =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True, verbose_name='Exam Name')
     subject = models.ForeignKey(TeacherSubject, on_delete=models.DO_NOTHING)
-    teacher = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, null=True)
     score = models.IntegerField()
     created = models.DateField(auto_now_add=True)
 

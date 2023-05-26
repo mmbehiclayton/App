@@ -171,4 +171,4 @@ class ExamResultForm(forms.ModelForm):
 
     class Meta:
         model = ExamMeanResult
-        fields = ['exam', 'subject', 'teacher' ,'score']             
+        fields = ['exam', 'subject','score']             
