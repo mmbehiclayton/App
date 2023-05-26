@@ -20,5 +20,13 @@ admin.site.register(Exam)
 admin.site.register(ExamMeanResult)
 admin.site.register(SessionTerm)
 
+admin.site.register(TeacherSubject)
+admin.site.register(TeacherPerformance)
+admin.site.register(StreamPerformance)
+admin.site.register(SchoolPerformance)
+admin.site.register(ClassCategory)
+admin.site.register(CategoryTargetScore)
+
+
 #change admin site title
 admin.site.site_header = "Alameen Plus"

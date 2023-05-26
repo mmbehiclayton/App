@@ -37,7 +37,7 @@ class Session(models.Model):
     end_year = models.DateField()
 
     def __str__(self):
-        return self.name + ": From " + str(self.start_year) + " to " + str(self.end_year)
+        return self.name
 
 class SessionTerm(models.Model):
 
@@ -91,18 +91,26 @@ class Branch(models.Model):
   
 
 #Newly added models are here=================
+class ClassCategory(models.Model):
+    name = models.CharField(max_length=100)
+    target_scores = models.ManyToManyField(SessionTerm, through='CategoryTargetScore')
 
+    def __str__(self):
+        return self.name
+
+
+class CategoryTargetScore(models.Model):
+    class_category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE)
+    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
+    target_score = models.DecimalField(max_digits=5, decimal_places=2)
+
+
+    def __str__(self):
+        return f'{self.class_category} - {self.term} - {self.target_score}'
 
 class Classes(models.Model):
-    # example
-    type_of_class = [
-        ('lower classes (1-3)', 'lower classes (1-3)'),
-        ('middle classes (4-6)', 'middle classes (4-6)'),
-        ('Junior Secondary', 'Junior Secondary'),
-    ]
-    # eexample
     class_id = models.AutoField(primary_key=True )
-    category = models.CharField(max_length=20, choices=type_of_class, null=True)
+    category = models.ForeignKey(ClassCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=120)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -128,13 +136,13 @@ class Exam(models.Model):
     created_at = models.DateField(auto_now=True)
     exam_date = models.DateField()
     name = models.CharField(max_length=50, unique=True)
-    target_marks = models.IntegerField()
+    target_marks = models.ForeignKey(CategoryTargetScore, on_delete=models.DO_NOTHING)
     # teacher = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, null=True)
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
     term = models.ForeignKey(SessionTerm, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return f'{self.term} {self.name}-Session: {self.session} -Target MarK: {self.target_marks}'    
+        return f'{self.term} {self.name}-Session: {self.session}'    
 
 class Stream(models.Model):
     stream_id = models.AutoField(primary_key=True)
@@ -148,17 +156,24 @@ class Stream(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=120)
-    staff = models.ForeignKey(Staff, on_delete=models.CASCADE,null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.name}'
 
+class TeacherSubject(models.Model):
+    teacher = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    stream = models.ForeignKey(Stream, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.teacher} {self.subject} {self.stream}'
+
 class ExamMeanResult(models.Model):
     result_id = models.AutoField(primary_key=True)
     exam =models.ForeignKey(Exam, on_delete=models.DO_NOTHING, null=True, verbose_name='Exam Name')
-    subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
+    subject = models.ForeignKey(TeacherSubject, on_delete=models.DO_NOTHING)
     teacher = models.ForeignKey(Staff, on_delete=models.DO_NOTHING, null=True)
     score = models.IntegerField()
     created = models.DateField(auto_now_add=True)
@@ -168,6 +183,40 @@ class ExamMeanResult(models.Model):
 
     def __str__(self):
         return f'{self.exam} - {self.subject} - {self.score}'
+
+#performance tables 
+class TeacherPerformance(models.Model):
+    teacher_subject = models.ForeignKey(TeacherSubject, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
+    year = models.ForeignKey(Session, on_delete=models.CASCADE)
+    mean_marks = models.ForeignKey(ExamMeanResult, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.teacher_subject}, {self.exam} {self.mean_marks}'
+
+
+class ClassPerformance(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    class_name = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
+    year = models.ForeignKey(Session, on_delete=models.CASCADE)
+    mean_marks = models.DecimalField(max_digits=5, decimal_places=2)
+
+
+class StreamPerformance(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    stream = models.ForeignKey(Stream, on_delete=models.CASCADE)
+    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
+    year = models.ForeignKey(Session, on_delete=models.CASCADE)
+    mean_marks = models.DecimalField(max_digits=5, decimal_places=2)
+
+
+class SchoolPerformance(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    term = models.ForeignKey(SessionTerm, on_delete=models.CASCADE)
+    year = models.ForeignKey(Session, on_delete=models.CASCADE)
+    mean_marks = models.DecimalField(max_digits=5, decimal_places=2)
 
 #End of newly added models =============/////==========
 
