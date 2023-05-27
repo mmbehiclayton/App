@@ -15,24 +15,23 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-10">
                                 <h3 class="card-title">MANAGE EXAMS</h3>
                             </div>
-                            <div class="col-md-1 p-1">
-                                <a class="btn btn-info" href="{% url 'add_exam' %}">Add Exam</a>
+                            <div class="col-md-2 p-1">
+                                <a class="btn btn-info" href="{% url 'add_exam' %}">+ Add Exam</a>
                             </div>
                         </div>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead class="thead-dark">
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th>Exam Id</th>
+                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Session</th>
-                                    <th>Term</th>
                                     <th>Exam Date</th>
-                                    <th>Term</th>
                                     <th>Target Marks</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,9 +41,7 @@
                                     <td>{{exam.exam_id}}</td>
                                     <td>{{exam.name}}</td>
                                     <td>{{exam.session}}</td>
-                                    <td>{{exam.term}}</td>
                                     <td>{{exam.exam_date}}</td>
-                                    <td>{{exam.term}}</td>
                                     <td>{{exam.target_marks}} %</td>
                                     <td>
                                         <a href="{% url 'update_exam' exam.exam_id %}" class="btn btn-info">Edit</a> -
