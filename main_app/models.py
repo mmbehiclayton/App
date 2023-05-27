@@ -118,7 +118,7 @@ class Classes(models.Model):
         unique_together = ('branch','name')
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} {self.branch}'
 
 
 class Staff(models.Model):

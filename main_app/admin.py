@@ -14,6 +14,8 @@ admin.site.register(CategoryTargetScore)
 admin.site.register(Classes)
 admin.site.register(Stream)
 admin.site.register(CustomUser, UserModel)
+
+#Register Staff on Admin Site
 admin.site.register(Staff)
 
 admin.site.register(Subject)

@@ -57,17 +57,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            {% url 'add_term' as add_term %}
-                            <a href="{{add_term}}"
-                                class="nav-link  {% if add_term == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add term
-
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             {% url 'manage_term' as manage_term %}
                             {% url 'edit_subject' subject_id as edit_subject %}
                             <a href="{{manage_term}}"
@@ -79,18 +68,7 @@
                                 </p>
                             </a>
                         </li> <!--end of manage term-->
-                        <!--Add Staff-->
-                        <li class="nav-item">
-                            {% url 'add_staff' as add_staff %}
-                            <a href="{{add_staff}}" class="nav-link {% if add_staff == request.path %} active {% endif %}">
-                                <i class="nav-icon fas fa-user-plus"></i>
-                                <p>
-                                    Add Staff
-        
-                                </p>
-                            </a>
-                        </li>
-        
+                        <!--Manage Staff-->        
                         <li class="nav-item">
                             {% url 'manage_staff' as manage_staff %}
                             {% url 'edit_staff' staff_id as edit_staff %}
@@ -105,17 +83,6 @@
                         </li>
                         <!--End of add staff-->
 
-                        <li class="nav-item">
-                            {% url 'add_subject' as add_subject %}
-                            <a href="{{add_subject}}"
-                                class="nav-link  {% if add_subject == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add Subject
-
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             {% url 'manage_subject' as manage_subject %}
                             {% url 'edit_subject' subject_id as edit_subject %}
@@ -135,17 +102,6 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            {% url 'add_classes' as add_classes %}
-                            <a href="{{add_classes}}"
-                                class="nav-link  {% if add_classes == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add class
-
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             {% url 'manage_classes' as manage_classes %}
                             {% url 'edit_subject' subject_id as edit_subject %}
                             <a href="{{manage_classes}}"
@@ -161,17 +117,6 @@
 
                     </ul>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            {% url 'add_stream' as add_stream %}
-                            <a href="{{add_stream}}"
-                                class="nav-link  {% if add_stream == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add Stream
-
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             {% url 'manage_stream' as manage_stream %}
                             {% url 'edit_subject' subject_id as edit_subject %}
