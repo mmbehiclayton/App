@@ -29,7 +29,7 @@
                     <a href="{{admin_home}}" class="nav-link {% if admin_home == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Home
+                            Dashboard
 
                         </p>
                     </a>
@@ -51,7 +51,7 @@
                     <a href="#" class="nav-link" >
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
-                            Settings
+                            Manage Settings
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -79,6 +79,31 @@
                                 </p>
                             </a>
                         </li> <!--end of manage term-->
+                        <!--Add Staff-->
+                        <li class="nav-item">
+                            {% url 'add_staff' as add_staff %}
+                            <a href="{{add_staff}}" class="nav-link {% if add_staff == request.path %} active {% endif %}">
+                                <i class="nav-icon fas fa-user-plus"></i>
+                                <p>
+                                    Add Staff
+        
+                                </p>
+                            </a>
+                        </li>
+        
+                        <li class="nav-item">
+                            {% url 'manage_staff' as manage_staff %}
+                            {% url 'edit_staff' staff_id as edit_staff %}
+                            <a href="{{manage_staff}}"
+                                class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Manage Staff
+        
+                                </p>
+                            </a>
+                        </li>
+                        <!--End of add staff-->
 
                         <li class="nav-item">
                             {% url 'add_subject' as add_subject %}
@@ -243,30 +268,6 @@
                     </ul>
                 </li> 
 
-                <li class="nav-item">
-                    {% url 'add_staff' as add_staff %}
-                    <a href="{{add_staff}}" class="nav-link {% if add_staff == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>
-                            Add Staff
-
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    {% url 'manage_staff' as manage_staff %}
-                    {% url 'edit_staff' staff_id as edit_staff %}
-                    <a href="{{manage_staff}}"
-                        class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Manage Staff
-
-                        </p>
-                    </a>
-                </li>
-                
                 
 
                 <li class="nav-item">
