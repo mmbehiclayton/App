@@ -8,7 +8,7 @@ from django.shortcuts import (HttpResponse, HttpResponseRedirect,
 from django.templatetags.static import static
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView,ListView
 from django.contrib.auth.decorators import login_required
 
 
@@ -692,3 +692,32 @@ def delete_session(request, session_id):
         messages.error(
             request, "There are students assigned to this session. Please move them to another session.")
     return redirect(reverse('manage_session'))
+
+#reports
+#teacher performance view
+@login_required(redirect_field_name="user_login") 
+class TeacherPerformanceListView(ListView):
+    model = ExamMeanResult
+    template_name = 'hod_template/home_content.html'
+    context_object_name = 'teacher_performance'
+
+    def get_queryset(self):
+        term = SessionTerm.objects.get(term='Term 1')  # Replace 'YourTermName' with the desired term name
+        exams = Exam.objects.filter(term=term)
+        teacher_performance = []
+        for exam in exams:
+            exam_results = ExamMeanResult.objects.filter(exam=exam)
+            for result in exam_results:
+                teacher = result.teacher
+                subject = result.subject
+                score = result.score
+                teacher_performance.append({
+                    'teacher': teacher,
+                    'subject': subject,
+                    'score': score,
+                    'exam': exam,
+                })
+                context = {
+                            'teacher_performance': teacher_performance
+    }
+        return render(self, 'hod_template/home_content.html', context)

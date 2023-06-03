@@ -117,7 +117,7 @@
             <!-- BAR CHART -->
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Performance Per Teacher</h3>
+                <h3 class="card-title">Performance Per Teacher</h3>             
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -126,6 +126,26 @@
                 </div>
               </div>
               <div class="card-body">
+                <table>
+                  <thead>
+                      <tr>
+                          <th>Teacher</th>
+                          <th>Subject</th>
+                          <th>Exam</th>
+                          <th>Score</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for performance in teacher_performance %}
+                      <tr>
+                          <td>{{ performance.teacher }}</td>
+                          <td>{{ performance.subject }}</td>
+                          <td>{{ performance.exam }}</td>
+                          <td>{{ performance.score }}</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
                 <div class="chart">
                   <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
