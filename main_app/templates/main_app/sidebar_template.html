@@ -61,7 +61,7 @@
                             {% url 'edit_subject' subject_id as edit_subject %}
                             <a href="{{manage_term}}"
                                 class="nav-link  {% if edit_subject == request.path or manage_term == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-book nav-icon"></i>
                                 <p>
                                     Manage Term
 
@@ -74,7 +74,7 @@
                             {% url 'edit_staff' staff_id as edit_staff %}
                             <a href="{{manage_staff}}"
                                 class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Manage Staff
         
@@ -88,7 +88,7 @@
                             {% url 'edit_subject' subject_id as edit_subject %}
                             <a href="{{manage_subject}}"
                                 class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-bookmark"></i>
                                 <p>
                                     Manage Subject
 
@@ -106,7 +106,7 @@
                             {% url 'edit_subject' subject_id as edit_subject %}
                             <a href="{{manage_classes}}"
                                 class="nav-link  {% if edit_subject == request.path or manage_classes == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-graduation-cap nav-icon"></i>
                                 <p>
                                     Manage Classes
 
@@ -122,7 +122,7 @@
                             {% url 'edit_subject' subject_id as edit_subject %}
                             <a href="{{manage_stream}}"
                                 class="nav-link  {% if edit_subject == request.path or manage_stream == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-list nav-icon"></i>
                                 <p>
                                     Manage Stream
 
@@ -139,7 +139,7 @@
 <!--Results menu-->
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link" >
-        <i class="nav-icon fas fa-book"></i>
+        <i class="nav-icon fas fa-check"></i>
         <p>
             Manage Results
             <i class="fas fa-angle-left right"></i>
@@ -150,7 +150,7 @@
 <!--Reports Menu-->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link" >
-                        <i class="nav-icon fas fa-file"></i>
+                        <i class="nav-icon far fa-file"></i>
                         <p>
                             Performance Reports
                             <i class="fas fa-angle-left right"></i>
@@ -161,7 +161,7 @@
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i  class="nav-icon fas fa-clock"></i>
+                        <i  class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Session
                             <i class="fas fa-angle-left right"></i>
