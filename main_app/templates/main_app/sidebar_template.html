@@ -5,7 +5,7 @@
     <a href="{% url 'admin_home' %}" class="brand-link">
         <img src="{% static 'dist/img/virusx.png' %} " alt="Alameen Plus Logo"
             class="brand-image " >
-        <span class="brand-text font-weight-light" >A+ Admin Panel</span>
+        <span class="brand-text font-weight-light" >Admin Panel</span>
     </a>
 
     <!-- Sidebar -->
@@ -29,7 +29,7 @@
                     <a href="{{admin_home}}" class="nav-link {% if admin_home == request.path %} active {% endif %}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Home
+                            Dashboard
 
                         </p>
                     </a>
@@ -49,25 +49,13 @@
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link" >
-                        <i class="nav-icon fas fa-bookmark"></i>
+                        <i class="nav-icon fas fa-cogs"></i>
                         <p>
-                            settings
+                            Manage Settings
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <h6 class="text-white"> Terms</h6>
-                        <li class="nav-item">
-                            {% url 'add_term' as add_term %}
-                            <a href="{{add_term}}"
-                                class="nav-link  {% if add_term == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add term
-
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             {% url 'manage_term' as manage_term %}
                             {% url 'edit_subject' subject_id as edit_subject %}
@@ -79,23 +67,40 @@
 
                                 </p>
                             </a>
+                        </li> <!--end of manage term-->
+                        <!--Manage Staff-->        
+                        <li class="nav-item">
+                            {% url 'manage_staff' as manage_staff %}
+                            {% url 'edit_staff' staff_id as edit_staff %}
+                            <a href="{{manage_staff}}"
+                                class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Manage Staff
+        
+                                </p>
+                            </a>
                         </li>
+                        <!--End of add staff-->
+
+                        <li class="nav-item">
+                            {% url 'manage_subject' as manage_subject %}
+                            {% url 'edit_subject' subject_id as edit_subject %}
+                            <a href="{{manage_subject}}"
+                                class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Manage Subject
+
+                                </p>
+                            </a>
+                        </li> <!--end of manage subject-->
+
+
                        
 
                     </ul>
                     <ul class="nav nav-treeview">
-                        <h6 class="text-white"> Classes</h6>
-                        <li class="nav-item">
-                            {% url 'add_classes' as add_classes %}
-                            <a href="{{add_classes}}"
-                                class="nav-link  {% if add_classes == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add class
-
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             {% url 'manage_classes' as manage_classes %}
                             {% url 'edit_subject' subject_id as edit_subject %}
@@ -112,18 +117,6 @@
 
                     </ul>
                     <ul class="nav nav-treeview">
-                        <h6 class="text-white"> Streams</h6>
-                        <li class="nav-item">
-                            {% url 'add_stream' as add_stream %}
-                            <a href="{{add_stream}}"
-                                class="nav-link  {% if add_stream == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add Stream
-
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             {% url 'manage_stream' as manage_stream %}
                             {% url 'edit_subject' subject_id as edit_subject %}
@@ -142,45 +135,29 @@
 
 
                 </li>
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
-            
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@end of manage settings menu -->
+<!--Results menu-->
+<li class="nav-item has-treeview">
+    <a href="#" class="nav-link" >
+        <i class="nav-icon fas fa-book"></i>
+        <p>
+            Manage Results
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+</li>    
+<!--end of results menu-->
+<!--Reports Menu-->
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                    <a href="#" class="nav-link" >
+                        <i class="nav-icon fas fa-file"></i>
                         <p>
-                            Subject
+                            Performance Reports
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            {% url 'add_subject' as add_subject %}
-                            <a href="{{add_subject}}"
-                                class="nav-link  {% if add_subject == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Add Subject
-
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            {% url 'manage_subject' as manage_subject %}
-                            {% url 'edit_subject' subject_id as edit_subject %}
-                            <a href="{{manage_subject}}"
-                                class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>
-                                    Manage Subject
-
-                                </p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
+                </li>   
+<!--End or reports menu-->
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -254,30 +231,6 @@
                     </ul>
                 </li> 
 
-                <li class="nav-item">
-                    {% url 'add_staff' as add_staff %}
-                    <a href="{{add_staff}}" class="nav-link {% if add_staff == request.path %} active {% endif %}">
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>
-                            Add Staff
-
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    {% url 'manage_staff' as manage_staff %}
-                    {% url 'edit_staff' staff_id as edit_staff %}
-                    <a href="{{manage_staff}}"
-                        class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Manage Staff
-
-                        </p>
-                    </a>
-                </li>
-                
                 
 
                 <li class="nav-item">

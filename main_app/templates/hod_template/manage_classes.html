@@ -15,11 +15,11 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-10">
                                 <h3 class="card-title">MANAGE CLASSES</h3>
                             </div>
-                            <div class="col-md-1 p-1">
-                                <a class="btn btn-info" href="{% url 'add_classes' %}">Add Class</a>
+                            <div class="col-md-2 p-1">
+                                <a class="btn btn-info" href="{% url 'add_classes' %}">+ Add Class</a>
                             </div>
                         </div>
                         <table id="example2" class="table table-bordered table-hover">
@@ -30,6 +30,7 @@
                                     <th>Branch</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
+                                    <th>Edit | Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
